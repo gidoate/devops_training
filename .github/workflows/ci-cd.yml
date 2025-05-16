@@ -23,7 +23,7 @@ jobs:
 
         # Step 4: Compile the C program
       - name: Compile program
-        working-directory: devops_training/src
+        working-directory: src
         run: gcc -g -o assembler.exe assembler.c parser.c symbol_table.c filehandling.c
 
       # Step 5: Run tests
