@@ -28,7 +28,7 @@ jobs:
       
       # Step 4: Save the .exe file as an artifact
       - name: Upload assembler.exe artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: assembler-exe
           path: src/assembler.exe
