@@ -21,10 +21,15 @@ jobs:
       - name: Install GCC
         run: sudo apt-get install build-essential
 
-        # Step 4: Compile the C program
+      # Step 3: Compile the C program
       - name: Compile program
         working-directory: src
         run: gcc -g -o assembler.exe assembler.c parser.c symbol_table.c filehandling.c
+      
+      # Step 4: List files
+      - name: List files
+        working-directory: src
+        run: ls -la
 
       # Step 5: Run tests (not done for the moment)
       # - name: Run tests
