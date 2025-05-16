@@ -21,12 +21,9 @@ jobs:
       - name: Install GCC
         run: sudo apt-get install build-essential
 
-      # Step 3: Change directory
-      - name: Change to src directory
-        run: cd devops_training/src
-
-      # Step 4: Compile the C program
+        # Step 4: Compile the C program
       - name: Compile program
+        working-directory: devops_training/src
         run: gcc -g -o assembler.exe assembler.c parser.c symbol_table.c filehandling.c
 
       # Step 5: Run tests
