@@ -21,10 +21,14 @@ jobs:
       - name: Install GCC
         run: sudo apt-get install build-essential
 
-      # Step 3: Compile the C program
-      - name: Compile program
-        run: gcc -g -o assembler.exe devops_training/src/assembler.c devops_training/src/parser.c devops_training/src/symbol_table.c devops_training/src/filehandling.c
+      # Step 3: Change directory
+      - name: Change to src directory
+        run: cd devops_training/src
 
-      # Step 4: Run tests
+      # Step 4: Compile the C program
+      - name: Compile program
+        run: gcc -g -o assembler.exe assembler.c parser.c symbol_table.c filehandling.c
+
+      # Step 5: Run tests
       - name: Run tests
         run: ./my_program
