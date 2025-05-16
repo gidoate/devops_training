@@ -26,7 +26,14 @@ jobs:
         working-directory: src
         run: gcc -g -o assembler.exe assembler.c parser.c symbol_table.c filehandling.c
       
-      # Step 4: List files
+      # Step 4: Save the .exe file as an artifact
+      - name: Upload assembler.exe artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: assembler-exe
+          path: devops_training/src/assembler.exe
+
+      # Step 5: List files
       - name: List files
         working-directory: src
         run: ls -la
