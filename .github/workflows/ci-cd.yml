@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for C Program
+name: Arduino CI
 
 on:
   push:
@@ -13,31 +13,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      # Step 2: Install GCC (C Compiler)
-      - name: Install GCC
-        run: sudo apt-get install build-essential
+    - name: Set up Arduino CLI
+      uses: arduino/setup-arduino-cli@v1
+      with:
+        version: 0.19.0
 
-      # Step 3: Compile the C program
-      - name: Compile program
-        working-directory: src
-        run: gcc -g -o assembler.exe assembler.c parser.c symbol_table.c filehandling.c
-      
-      # Step 4: Save the .exe file as an artifact
-      - name: Upload assembler.exe artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: assembler-exe
-          path: src/assembler.exe
+    - name: Install Arduino core
+      run: arduino-cli core install arduino:avr
 
-      # Step 5: List files
-      - name: List files
-        working-directory: src
-        run: ls -la
+    - name: Install dependencies
+      run: arduino-cli lib install "ArduinoJson"
 
-      # Step 5: Run tests (not done for the moment)
-      # - name: Run tests
-      #   run: ./my_program
+    - name: Compile Sketch
+      run: arduino-cli compile --fqbn arduino:avr:uno C:\\EmbeddedDevelopment\\devops_training\\src\\src\\main.cpp
+
+    - name: Upload Sketch (optional)
+      if: github.event_name == 'push'
+      run: arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno C:\\EmbeddedDevelopment\\devops_training\\src\\src\\main.cpp
+      env:
+        ARDUINO_UPLOAD_PORT: ${{ secrets.ARDUINO_UPLOAD_PORT }}
