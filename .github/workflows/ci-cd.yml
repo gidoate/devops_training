@@ -22,7 +22,6 @@ jobs:
 
       - name: Build with PlatformIO
         run: pio run
-        working-directory: src
 
       - name: Rename firmware with date
         run: |
