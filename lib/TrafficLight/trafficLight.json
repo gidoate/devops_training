@@ -1,0 +1,9 @@
+{
+    "name": "TrafficLight",
+    "version": "1.0.0",
+    "author": "Your Name",
+    "description": "Library for controlling a traffic light system",
+    "dependencies": {},
+    "frameworks": ["arduino"],
+    "platforms": ["atmelavr"]
+}
