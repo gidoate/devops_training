@@ -26,11 +26,11 @@ jobs:
       - name: Rename firmware with date
         run: |
           DATE=$(date +"%y%m%d")
-          cp src/.pio/build/uno/firmware.hex "${DATE}_Firmware.hex"
+          cp .pio/build/uno/firmware.hex "${DATE}_Firmware.hex"
           echo "FIRMWARE_FILE=${DATE}_Firmware.hex" >> $GITHUB_ENV
 
       - name: Upload all PlatformIO build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: platformio-build-artifacts
-          path: src/.pio/build/uno/*
+          path: .pio/build/uno/*
