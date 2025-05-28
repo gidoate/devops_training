@@ -19,6 +19,9 @@ jobs:
 
       - name: Install PlatformIO
         run: pip install platformio
+      
+      - name: Clean PlatformIO build
+        run: pio run --target clean
 
       - name: Build with PlatformIO
         run: pio run
