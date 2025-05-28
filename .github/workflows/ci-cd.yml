@@ -32,7 +32,8 @@ jobs:
 
       - name: Copy unity_config.h into Unity library folder
         run: |
-          cp include/unity_config.h .pio/libdeps/uno/Unity/src/unity_config.h || echo "unity_config.h not found"
+          mkdir -p .pio/libdeps/uno/Unity/src/
+          cp include/unity_config.h .pio/libdeps/uno/Unity/src/unity_config.h
 
       - name: Build with PlatformIO
         run: pio run
