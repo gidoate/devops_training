@@ -23,6 +23,13 @@ jobs:
       - name: Clean PlatformIO build
         run: pio run --target clean
       
+      - name: Ensure unity_config.h exists
+        run: |
+          if [ ! -f include/unity_config.h ]; then
+            echo "Error: unity_config.h is missing!" 
+            exit 1
+          fi
+
       - name: Copy unity_config.h into Unity library folder
         run: |
           cp include/unity_config.h .pio/libdeps/uno/Unity/src/unity_config.h || echo "unity_config.h not found"
