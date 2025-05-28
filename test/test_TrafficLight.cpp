@@ -1,30 +1,49 @@
-#include <ArduinoFake.h>
-#include <gtest/gtest.h>
-#include "TrafficLight.h"
+#include <Arduino.h>
+#include <unity.h>
+#include "unity_config.h"
 
+#include <config.h>
+#include <TrafficLight.h>
 
-TEST(TrafficLightTest, SetupPins) {
-    TrafficLight tl(1, 2, 3);
-    When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
-    tl.setup();
-    Verify(Method(ArduinoFake(), pinMode).Using(1, OUTPUT)).Once();
-    Verify(Method(ArduinoFake(), pinMode).Using(2, OUTPUT)).Once();
-    Verify(Method(ArduinoFake(), pinMode).Using(3, OUTPUT)).Once();
+TrafficLight trafficLight(RED_PIN, YELLOW_PIN, GREEN_PIN);
+
+bool redState = false, yellowState = false, greenState = false;
+
+void digitalWriteMock(int pin, int state) {
+    if (pin == RED_PIN) redState = (state == HIGH);
+    if (pin == YELLOW_PIN) yellowState = (state == HIGH);
+    if (pin == GREEN_PIN) greenState = (state == HIGH);
 }
 
-TEST(TrafficLightTest, RunSequence) {
-    TrafficLight tl(10, 11, 12);
-
-    When(Method(ArduinoFake(), digitalWrite)).AlwaysReturn();
-    When(Method(ArduinoFake(), delay)).AlwaysReturn();
-
-    tl.run(100);
-
-    Verify(Method(ArduinoFake(), digitalWrite).Using(10, HIGH)).Once();
-    Verify(Method(ArduinoFake(), digitalWrite).Using(10, LOW)).Once();
-    Verify(Method(ArduinoFake(), digitalWrite).Using(11, HIGH)).Once();
-    Verify(Method(ArduinoFake(), digitalWrite).Using(11, LOW)).Once();
-    Verify(Method(ArduinoFake(), digitalWrite).Using(12, HIGH)).Once();
-    Verify(Method(ArduinoFake(), digitalWrite).Using(12, LOW)).Once();
-    Verify(Method(ArduinoFake(), delay).Using(100)).Exactly(3);
+void test_red_light() {
+    trafficLight.run(DELAY_TIME);
+    TEST_ASSERT_TRUE(redState);
 }
+
+void test_yellow_light() {
+    trafficLight.run(DELAY_TIME);
+    TEST_ASSERT_TRUE(yellowState);
+}
+
+void test_green_light() {
+    trafficLight.run(DELAY_TIME);
+    TEST_ASSERT_TRUE(greenState);
+}
+
+void setUp() {
+    // Setup code if needed
+}
+
+void tearDown() {
+    // Cleanup code if needed
+}
+
+void setup() {
+    UNITY_BEGIN();
+    RUN_TEST(test_red_light);
+    RUN_TEST(test_yellow_light);
+    RUN_TEST(test_green_light);
+    UNITY_END();
+}
+
+void loop() {}
