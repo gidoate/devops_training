@@ -22,6 +22,10 @@ jobs:
       
       - name: Clean PlatformIO build
         run: pio run --target clean
+      
+      - name: Copy unity_config.h into Unity library folder
+        run: |
+          cp include/unity_config.h .pio/libdeps/uno/Unity/src/unity_config.h || echo "unity_config.h not found"
 
       - name: Build with PlatformIO
         run: pio run
