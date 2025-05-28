@@ -3,6 +3,6 @@
 
 
 // Override Unity settings if needed
-#define UNITY_INCLUDE_CONFIG_H
+// #define UNITY_INCLUDE_CONFIG_H
 
 #endif // UNITY_CONFIG_H
