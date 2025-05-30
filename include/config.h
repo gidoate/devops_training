@@ -7,6 +7,6 @@ int YELLOW_PIN = 11;
 int GREEN_PIN = 12;
 
 // Define the delay time
-int DELAY_TIME = 1000;
+int DELAY_TIME = 100;
 
 #endif

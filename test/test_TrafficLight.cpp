@@ -45,6 +45,7 @@ void test_light_sequence() {
     TEST_ASSERT_TRUE(digitalRead(GREEN_PIN) == LOW);
 
     // 2. YELLOW ON
+    delay(DELAY_TIME);
     light.run(DELAY_TIME); // Next state
     delay(10);
     TEST_ASSERT_TRUE(digitalRead(RED_PIN) == LOW);
@@ -52,6 +53,7 @@ void test_light_sequence() {
     TEST_ASSERT_TRUE(digitalRead(GREEN_PIN) == LOW);
 
     // 3. GREEN ON
+    delay(DELAY_TIME);
     light.run(DELAY_TIME); // Next state
     delay(10);
     TEST_ASSERT_TRUE(digitalRead(RED_PIN) == LOW);
