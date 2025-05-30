@@ -1,0 +1,27 @@
+#include <Arduino.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+void unityOutputChar(int c) {
+  Serial.write(c);
+}
+#ifdef __cplusplus
+}
+#endif
+#include <unity.h>
+
+void test_always_passes() {
+    TEST_ASSERT_TRUE(1);
+}
+
+void setup() {
+    Serial.begin(9600);
+    delay(1000); // Ensure serial monitor is ready
+    Serial.println("Hello from Arduino!");
+    UNITY_BEGIN();
+    RUN_TEST(test_always_passes);
+    UNITY_END();
+    while (true) delay(1000);
+}
+
+void loop() {}

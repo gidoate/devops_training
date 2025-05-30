@@ -1,17 +1,15 @@
-#ifndef TRAFFICLIGHT_H
-#define TRAFFICLIGHT_H
+#ifndef TRAFFIC_LIGHT_H
+#define TRAFFIC_LIGHT_H
 
 #include <Arduino.h>
 
-class TrafficLight
-{
+class TrafficLight {
 public:
     TrafficLight(int rPin, int yPin, int gPin);
     void setup();
-    void run(int dTime);
-
+    void run(int delayTime); // no argument
 private:
-    const int redPin, yellowPin, greenPin;
+    int redPin, yellowPin, greenPin;
+    int state = 0;
 };
-
-#endif
+#endif // TRAFFIC_LIGHT_H
