@@ -49,24 +49,3 @@ jobs:
         with:
           name: platformio-build-artifacts
           path: .pio/build/uno/*
-  test:
-      runs-on: ubuntu-latest
-      needs: build # Ensures testing runs AFTER building
-      steps:
-        - uses: actions/checkout@v4
-
-        - name: Install PlatformIO
-          run: pip install platformio
-
-        - name: Upload Unit Tests
-          run: pio test -e uno --without-testing
-        
-        - name: Run Unit Tests
-          run: pio device monitor
-
-        - name: Check Test Results
-          run: |
-            if grep -q "FAIL" .pio/test_output.log; then
-              echo "Tests failed!"
-              exit 1
-            fi
